@@ -10,10 +10,12 @@ export interface EMIEntry {
   balanceRemaining: number;
   totalAmount: number;
   monthlyPayment: number;
-  interestRate?: number;
-  dueDate: number; // day of month
+  interestRate?: string;
+  dueDate: number;
   monthsRemaining: number;
   totalMonths: number;
+  endDate?: string;
+  notes?: string;
   lastPaidDate?: string;
   nextDueDate?: string;
   isOverdue?: boolean;
