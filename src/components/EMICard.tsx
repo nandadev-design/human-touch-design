@@ -50,7 +50,7 @@ export function EMICard({ entry }: EMICardProps) {
           <div className="mb-2">
             <p className="text-[9px] uppercase tracking-wider text-muted-foreground/70 font-body mb-0.5">Balance remaining</p>
             <div className="flex items-baseline justify-between">
-              <p className="font-mono text-lg text-foreground leading-none">₹{entry.balanceRemaining.toLocaleString("en-IN")}</p>
+              <p className="font-nums text-lg font-semibold text-foreground leading-none">₹{entry.balanceRemaining.toLocaleString("en-IN")}</p>
               {entry.monthsRemaining > 0 && (
                 <span className="text-[10px] text-muted-foreground font-body">~{entry.monthsRemaining} mo</span>
               )}
@@ -112,7 +112,7 @@ export function EMICard({ entry }: EMICardProps) {
       {entry.type === "subscription" && (
         <>
           <div className="flex items-baseline justify-between mb-1">
-            <p className="font-mono text-lg text-foreground leading-none">₹{entry.monthlyPayment.toLocaleString("en-IN")}</p>
+            <p className="font-nums text-lg font-semibold text-foreground leading-none">₹{entry.monthlyPayment.toLocaleString("en-IN")}</p>
             <span className="text-[10px] text-muted-foreground/60 font-body">/month</span>
           </div>
           <div className="flex items-center gap-2 text-[10px] text-muted-foreground/70 font-body">

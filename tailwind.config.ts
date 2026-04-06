@@ -16,6 +16,7 @@ export default {
       fontFamily: {
         heading: ["Merriweather", "Georgia", "serif"],
         body: ["Lato", "-apple-system", "sans-serif"],
+        nums: ["'Plus Jakarta Sans'", "sans-serif"],
         mono: ["Space Mono", "Courier New", "monospace"],
       },
       colors: {
