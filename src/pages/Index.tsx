@@ -1,10 +1,12 @@
 import { useState, useMemo } from "react";
 import { Sun, Moon } from "lucide-react";
-import { sampleEntries } from "@/data/sampleData";
+import { useEntries } from "@/hooks/use-entries";
 import { StatCard } from "@/components/StatCard";
 import { EMICard } from "@/components/EMICard";
+import { EntryFormDialog } from "@/components/EntryFormDialog";
 import { useTheme } from "@/hooks/use-theme";
 import { cn } from "@/lib/utils";
+import { EMIEntry } from "@/types/emi";
 
 type FilterType = "all" | "emi" | "subscription" | "closed";
 
@@ -12,15 +14,19 @@ const Index = () => {
   const [filter, setFilter] = useState<FilterType>("all");
   const { theme, setTheme } = useTheme();
   const isDark = theme === "dark" || (theme === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches);
+  const { entries, addEntry, updateEntry, removeEntry } = useEntries();
+
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [editingEntry, setEditingEntry] = useState<EMIEntry | null>(null);
 
   const filtered = useMemo(() => {
-    if (filter === "all") return sampleEntries.filter((e) => e.status === "active");
-    if (filter === "closed") return sampleEntries.filter((e) => e.status === "closed");
-    return sampleEntries.filter((e) => e.type === filter && e.status === "active");
-  }, [filter]);
+    if (filter === "all") return entries.filter((e) => e.status === "active");
+    if (filter === "closed") return entries.filter((e) => e.status === "closed");
+    return entries.filter((e) => e.type === filter && e.status === "active");
+  }, [filter, entries]);
 
   const stats = useMemo(() => {
-    const active = sampleEntries.filter((e) => e.status === "active");
+    const active = entries.filter((e) => e.status === "active");
     const emis = active.filter((e) => e.type === "emi");
     const subs = active.filter((e) => e.type === "subscription");
     return {
@@ -32,14 +38,32 @@ const Index = () => {
       totalLoans: emis.length,
       activeSubs: subs.length,
     };
-  }, []);
+  }, [entries]);
 
   const filters: { key: FilterType; label: string; count: number }[] = [
-    { key: "all", label: "All", count: sampleEntries.filter((e) => e.status === "active").length },
-    { key: "emi", label: "EMIs", count: sampleEntries.filter((e) => e.type === "emi" && e.status === "active").length },
-    { key: "subscription", label: "Subscriptions", count: sampleEntries.filter((e) => e.type === "subscription" && e.status === "active").length },
-    { key: "closed", label: "Closed", count: sampleEntries.filter((e) => e.status === "closed").length },
+    { key: "all", label: "All", count: entries.filter((e) => e.status === "active").length },
+    { key: "emi", label: "EMIs", count: entries.filter((e) => e.type === "emi" && e.status === "active").length },
+    { key: "subscription", label: "Subscriptions", count: entries.filter((e) => e.type === "subscription" && e.status === "active").length },
+    { key: "closed", label: "Closed", count: entries.filter((e) => e.status === "closed").length },
   ];
+
+  const handleAdd = () => {
+    setEditingEntry(null);
+    setDialogOpen(true);
+  };
+
+  const handleEdit = (entry: EMIEntry) => {
+    setEditingEntry(entry);
+    setDialogOpen(true);
+  };
+
+  const handleSave = (data: Omit<EMIEntry, "id">) => {
+    if (editingEntry) {
+      updateEntry(editingEntry.id, data);
+    } else {
+      addEntry(data);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -61,7 +85,10 @@ const Index = () => {
               >
                 {isDark ? <Sun size={18} /> : <Moon size={18} />}
               </button>
-              <button className="px-4 py-2 rounded-md bg-primary text-primary-foreground text-sm font-body font-medium hover:bg-primary/90 transition-colors">
+              <button
+                onClick={handleAdd}
+                className="px-4 py-2 rounded-md bg-primary text-primary-foreground text-sm font-body font-medium hover:bg-primary/90 transition-colors"
+              >
                 + Add
               </button>
             </div>
@@ -70,66 +97,22 @@ const Index = () => {
 
         {/* Stats Grid */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-0">
-          <StatCard
-            label="Total outstanding"
-            value={`₹${stats.totalOutstanding.toLocaleString("en-IN")}`}
-            subtitle={`${stats.activeEMIs} active EMIs`}
-            accentColor="hsl(0, 70%, 55%)"
-          />
-          <StatCard
-            label="Monthly EMI"
-            value={`₹${stats.monthlyEMI.toLocaleString("en-IN")}`}
-            subtitle={`across ${stats.totalLoans} loans`}
-            accentColor="hsl(24, 80%, 50%)"
-          />
-          <StatCard
-            label="Monthly subs"
-            value={`₹${stats.monthlySubs.toLocaleString("en-IN")}`}
-            subtitle={`${stats.activeSubs} subscriptions`}
-            accentColor="hsl(270, 60%, 55%)"
-          />
-          <StatCard
-            label="Total monthly out"
-            value={`₹${stats.totalMonthlyOut.toLocaleString("en-IN")}`}
-            subtitle="EMIs + subscriptions"
-            accentColor="hsl(190, 70%, 45%)"
-          />
+          <StatCard label="Total outstanding" value={`₹${stats.totalOutstanding.toLocaleString("en-IN")}`} subtitle={`${stats.activeEMIs} active EMIs`} accentColor="hsl(0, 70%, 55%)" />
+          <StatCard label="Monthly EMI" value={`₹${stats.monthlyEMI.toLocaleString("en-IN")}`} subtitle={`across ${stats.totalLoans} loans`} accentColor="hsl(24, 80%, 50%)" />
+          <StatCard label="Monthly subs" value={`₹${stats.monthlySubs.toLocaleString("en-IN")}`} subtitle={`${stats.activeSubs} subscriptions`} accentColor="hsl(270, 60%, 55%)" />
+          <StatCard label="Total monthly out" value={`₹${stats.totalMonthlyOut.toLocaleString("en-IN")}`} subtitle="EMIs + subscriptions" accentColor="hsl(190, 70%, 45%)" />
         </div>
 
-        {/* Filter Tabs — below stats */}
+        {/* Filter Tabs */}
         <div className="border-b border-border/60 mb-6 mt-1">
           <div className="flex items-stretch">
             {filters.map((f) => (
-              <button
-                key={f.key}
-                onClick={() => setFilter(f.key)}
-                className="relative group"
-              >
-                <span
-                  className={cn(
-                    "inline-flex items-center gap-2 px-4 py-3.5 text-sm font-body font-medium transition-colors",
-                    filter === f.key
-                      ? "text-foreground"
-                      : "text-muted-foreground/50 hover:text-muted-foreground"
-                  )}
-                >
+              <button key={f.key} onClick={() => setFilter(f.key)} className="relative group">
+                <span className={cn("inline-flex items-center gap-2 px-4 py-3.5 text-sm font-body font-medium transition-colors", filter === f.key ? "text-foreground" : "text-muted-foreground/50 hover:text-muted-foreground")}>
                   {f.label}
-                  <span className={cn(
-                    "font-nums text-[11px] font-semibold tabular-nums",
-                    filter === f.key ? "opacity-50" : "opacity-40"
-                  )}>
-                    {f.count}
-                  </span>
+                  <span className={cn("font-nums text-[11px] font-semibold tabular-nums", filter === f.key ? "opacity-50" : "opacity-40")}>{f.count}</span>
                 </span>
-                {/* Active underline */}
-                <span
-                  className={cn(
-                    "absolute bottom-[-1px] left-0 right-0 h-[2.5px] rounded-t-sm transition-all",
-                    filter === f.key
-                      ? "bg-foreground"
-                      : "bg-transparent"
-                  )}
-                />
+                <span className={cn("absolute bottom-[-1px] left-0 right-0 h-[2.5px] rounded-t-sm transition-all", filter === f.key ? "bg-foreground" : "bg-transparent")} />
               </button>
             ))}
           </div>
@@ -138,7 +121,7 @@ const Index = () => {
         {/* Cards Grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {filtered.map((entry) => (
-            <EMICard key={entry.id} entry={entry} />
+            <EMICard key={entry.id} entry={entry} onEdit={handleEdit} onRemove={removeEntry} />
           ))}
         </div>
 
@@ -148,6 +131,8 @@ const Index = () => {
           </div>
         )}
       </div>
+
+      <EntryFormDialog open={dialogOpen} onOpenChange={setDialogOpen} entry={editingEntry} onSave={handleSave} />
     </div>
   );
 };

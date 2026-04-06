@@ -3,9 +3,11 @@ import { cn } from "@/lib/utils";
 
 interface EMICardProps {
   entry: EMIEntry;
+  onEdit: (entry: EMIEntry) => void;
+  onRemove: (id: string) => void;
 }
 
-export function EMICard({ entry }: EMICardProps) {
+export function EMICard({ entry, onEdit, onRemove }: EMICardProps) {
   const paidPercent = entry.totalAmount > 0
     ? Math.round(((entry.totalAmount - entry.balanceRemaining) / entry.totalAmount) * 100)
     : 0;
@@ -34,10 +36,16 @@ export function EMICard({ entry }: EMICardProps) {
           </div>
         </div>
         <div className="flex gap-1">
-          <button className="text-[10px] font-body text-muted-foreground px-2 py-1 rounded border border-border/40 hover:bg-muted transition-colors">
+          <button
+            onClick={() => onEdit(entry)}
+            className="text-[10px] font-body text-muted-foreground px-2 py-1 rounded border border-border/40 hover:bg-muted transition-colors"
+          >
             Edit
           </button>
-          <button className="text-[10px] font-body text-destructive/60 px-2 py-1 rounded border border-border/30 hover:bg-destructive/5 transition-colors">
+          <button
+            onClick={() => onRemove(entry.id)}
+            className="text-[10px] font-body text-destructive/60 px-2 py-1 rounded border border-border/30 hover:bg-destructive/5 transition-colors"
+          >
             ×
           </button>
         </div>
@@ -46,7 +54,6 @@ export function EMICard({ entry }: EMICardProps) {
       {/* EMI view */}
       {entry.type === "emi" && (
         <>
-          {/* Balance */}
           <div className="mb-2">
             <p className="text-[9px] uppercase tracking-wider text-muted-foreground/70 font-body mb-0.5">Balance remaining</p>
             <div className="flex items-baseline justify-between">
@@ -56,34 +63,21 @@ export function EMICard({ entry }: EMICardProps) {
               )}
             </div>
           </div>
-
-          {/* Monthly */}
           <p className="text-[11px] text-muted-foreground font-body mb-2">
             Monthly ₹{entry.monthlyPayment.toLocaleString("en-IN")}
           </p>
-
-          {/* Progress bar */}
           {entry.totalAmount > 0 && (
             <div className="mb-2">
               <div className="h-1 rounded-full bg-border/50 overflow-hidden">
-                <div
-                  className="h-full rounded-full bg-primary/60 transition-all"
-                  style={{ width: `${paidPercent}%` }}
-                />
+                <div className="h-full rounded-full bg-primary/60 transition-all" style={{ width: `${paidPercent}%` }} />
               </div>
-              <p className="text-[9px] text-muted-foreground/60 mt-0.5 font-body">
-                {paidPercent}% paid of ₹{entry.totalAmount.toLocaleString("en-IN")}
-              </p>
+              <p className="text-[9px] text-muted-foreground/60 mt-0.5 font-body">{paidPercent}% paid of ₹{entry.totalAmount.toLocaleString("en-IN")}</p>
             </div>
           )}
-
-          {/* Due info */}
           <div className="flex items-center gap-2 text-[10px] text-muted-foreground/70 font-body mb-2">
             <span>📅 Due {entry.dueDate}st</span>
             {entry.endDate && <span>· Ends {entry.endDate}</span>}
           </div>
-
-          {/* Status badge */}
           {entry.isOverdue ? (
             <div className="flex items-center gap-2 px-2.5 py-1.5 rounded bg-destructive/5 border border-destructive/10 mb-2">
               <span className="w-1.5 h-1.5 rounded-full bg-destructive" />
@@ -100,8 +94,6 @@ export function EMICard({ entry }: EMICardProps) {
               </div>
             </div>
           ) : null}
-
-          {/* Pay button */}
           <button className="w-full py-2 rounded-md bg-primary text-primary-foreground text-[13px] font-body font-medium hover:bg-primary/90 transition-colors">
             Pay ₹{entry.monthlyPayment.toLocaleString("en-IN")}
           </button>
