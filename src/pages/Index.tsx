@@ -1,7 +1,9 @@
 import { useState, useMemo } from "react";
+import { Sun, Moon } from "lucide-react";
 import { sampleEntries } from "@/data/sampleData";
 import { StatCard } from "@/components/StatCard";
 import { EMICard } from "@/components/EMICard";
+import { useTheme } from "@/hooks/use-theme";
 import { cn } from "@/lib/utils";
 
 type FilterType = "all" | "emi" | "subscription" | "closed";
