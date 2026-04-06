@@ -115,7 +115,7 @@ const Index = () => {
                 >
                   {f.label}
                   <span className={cn(
-                    "font-mono text-[11px] tabular-nums",
+                    "font-nums text-[11px] font-semibold tabular-nums",
                     filter === f.key ? "opacity-50" : "opacity-40"
                   )}>
                     {f.count}
