@@ -10,6 +10,8 @@ type FilterType = "all" | "emi" | "subscription" | "closed";
 
 const Index = () => {
   const [filter, setFilter] = useState<FilterType>("all");
+  const { theme, setTheme } = useTheme();
+  const isDark = theme === "dark" || (theme === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches);
 
   const filtered = useMemo(() => {
     if (filter === "all") return sampleEntries.filter((e) => e.status === "active");
