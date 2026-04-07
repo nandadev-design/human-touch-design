@@ -58,6 +58,7 @@
   .dark {
     --background: 220 16% 12%;
     --foreground: 0 0% 100%;
+    --button-box: 216 14% 16%;
 
     --card: 216 14% 16%;
     --card-foreground: 0 0% 100%;
