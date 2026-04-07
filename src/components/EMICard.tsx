@@ -72,7 +72,7 @@ export function EMICard({ entry, onEdit, onRemove }: EMICardProps) {
 
           {/* Payment status */}
           {entry.isOverdue ? (
-            <div className="flex items-center gap-3 px-4 py-3 rounded-lg bg-destructive/5 border border-destructive/10">
+            <div className="flex items-center gap-3 px-4 py-3 rounded-lg bg-destructive/5">
               <span className="w-2 h-2 rounded-full bg-destructive flex-shrink-0" />
               <div>
                 <p className="text-sm font-body text-destructive font-medium">Overdue by {entry.overdueDays}d</p>
