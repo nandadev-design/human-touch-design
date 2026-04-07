@@ -61,8 +61,8 @@ export function EMICard({ entry, onEdit, onRemove }: EMICardProps) {
             </div>
           </div>
 
-          <p className="text-sm text-foreground font-body mb-4">
-            Monthly <span className="font-nums font-semibold">₹{entry.monthlyPayment.toLocaleString("en-IN")}</span>
+          <p className="text-sm text-muted-foreground font-body mb-4">
+            Monthly <span className="font-nums font-semibold text-foreground">₹{entry.monthlyPayment.toLocaleString("en-IN")}</span>
           </p>
 
           <div className="flex items-center gap-2 text-sm text-muted-foreground font-body mb-5">
