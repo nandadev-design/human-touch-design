@@ -72,14 +72,14 @@ export function EMICard({ entry, onEdit, onRemove }: EMICardProps) {
 
           {/* Payment status */}
           {entry.isOverdue ? (
-            <div className="flex items-center gap-3 px-4 py-3 rounded-lg bg-destructive/5 border border-destructive/10 mb-5">
+            <div className="flex items-center gap-3 px-4 py-3 rounded-lg bg-destructive/5 border border-destructive/10">
               <span className="w-2 h-2 rounded-full bg-destructive flex-shrink-0" />
               <div>
                 <p className="text-sm font-body text-destructive font-medium">Overdue by {entry.overdueDays}d</p>
               </div>
             </div>
           ) : entry.lastPaidDate ? (
-            <div className="flex items-start gap-3 px-4 py-3 rounded-lg bg-muted/50 border border-border/30 mb-5">
+            <div className="flex items-start gap-3 px-4 py-3 rounded-lg bg-muted/50 border border-border/30">
               <span className="w-2 h-2 rounded-full bg-success flex-shrink-0 mt-1.5" />
               <div>
                 <p className="text-sm font-body text-success font-medium">Paid on {entry.lastPaidDate}</p>
@@ -90,14 +90,19 @@ export function EMICard({ entry, onEdit, onRemove }: EMICardProps) {
             </div>
           ) : null}
 
-          {/* Pay button + undo */}
-          <div className="flex items-center gap-2">
-            <button className="flex-1 py-3 rounded-lg bg-primary text-primary-foreground text-sm font-body font-semibold hover:bg-primary/90 transition-colors">
-              Pay ₹{entry.monthlyPayment.toLocaleString("en-IN")}
-            </button>
-            <button className="w-11 h-11 rounded-lg bg-muted flex items-center justify-center hover:bg-muted/80 transition-colors flex-shrink-0">
-              <img src={iconUndo} alt="Undo" className="w-4 h-4 opacity-40 dark:invert" />
-            </button>
+          {/* Spacer to push button box to bottom */}
+          <div className="flex-1" />
+
+          {/* Pay button + undo in separate box */}
+          <div className="bg-button-box rounded-b-xl px-5 py-[25px] -mx-5 sm:-mx-6 -mb-5 sm:-mb-6 mt-5">
+            <div className="flex items-center gap-2">
+              <button className="flex-1 py-3 rounded-lg bg-primary text-primary-foreground text-sm font-body font-semibold hover:bg-primary/90 transition-colors">
+                Pay ₹{entry.monthlyPayment.toLocaleString("en-IN")}
+              </button>
+              <button className="w-11 h-11 rounded-lg bg-muted flex items-center justify-center hover:bg-muted/80 transition-colors flex-shrink-0">
+                <img src={iconUndo} alt="Undo" className="w-4 h-4 opacity-40 dark:invert" />
+              </button>
+            </div>
           </div>
         </>
       )}
