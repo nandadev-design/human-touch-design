@@ -79,7 +79,7 @@ export function EMICard({ entry, onEdit, onRemove }: EMICardProps) {
               </div>
             </div>
           ) : entry.lastPaidDate ? (
-            <div className="flex items-start gap-3 px-4 py-3 rounded-lg bg-muted/50 border border-border/30">
+            <div className="flex items-start gap-3 px-4 py-3 rounded-lg bg-muted/50">
               <span className="w-2 h-2 rounded-full bg-success flex-shrink-0 mt-1.5" />
               <div>
                 <p className="text-sm font-body text-success font-medium">Paid on {entry.lastPaidDate}</p>
