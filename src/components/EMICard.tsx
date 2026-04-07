@@ -13,7 +13,7 @@ interface EMICardProps {
 
 export function EMICard({ entry, onEdit, onRemove }: EMICardProps) {
   return (
-    <div className="rounded-xl border border-border/30 bg-card p-5 sm:p-6 transition-all hover:shadow-lg hover:-translate-y-0.5 duration-200">
+    <div className="rounded-xl bg-card p-5 sm:p-6 transition-all hover:shadow-lg hover:-translate-y-0.5 duration-200 flex flex-col">
       {/* Header */}
       <div className="flex items-center justify-between mb-5">
         <div className="flex items-center gap-3">
