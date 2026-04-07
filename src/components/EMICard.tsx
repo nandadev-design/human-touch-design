@@ -61,8 +61,8 @@ export function EMICard({ entry, onEdit, onRemove }: EMICardProps) {
             </div>
           </div>
 
-          <p className="text-sm text-foreground font-body mb-4">
-            Monthly <span className="font-nums font-semibold">₹{entry.monthlyPayment.toLocaleString("en-IN")}</span>
+          <p className="text-sm text-muted-foreground font-body mb-4">
+            Monthly <span className="font-nums font-semibold text-foreground">₹{entry.monthlyPayment.toLocaleString("en-IN")}</span>
           </p>
 
           <div className="flex items-center gap-2 text-sm text-muted-foreground font-body mb-5">
@@ -72,14 +72,14 @@ export function EMICard({ entry, onEdit, onRemove }: EMICardProps) {
 
           {/* Payment status */}
           {entry.isOverdue ? (
-            <div className="flex items-center gap-3 px-4 py-3 rounded-lg bg-destructive/5 border border-destructive/10">
+            <div className="flex items-center gap-3 px-4 py-3 rounded-lg bg-destructive/5">
               <span className="w-2 h-2 rounded-full bg-destructive flex-shrink-0" />
               <div>
                 <p className="text-sm font-body text-destructive font-medium">Overdue by {entry.overdueDays}d</p>
               </div>
             </div>
           ) : entry.lastPaidDate ? (
-            <div className="flex items-start gap-3 px-4 py-3 rounded-lg bg-muted/50 border border-border/30">
+            <div className="flex items-start gap-3 px-4 py-3 rounded-lg bg-muted/50">
               <span className="w-2 h-2 rounded-full bg-success flex-shrink-0 mt-1.5" />
               <div>
                 <p className="text-sm font-body text-success font-medium">Paid on {entry.lastPaidDate}</p>

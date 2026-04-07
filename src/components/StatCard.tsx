@@ -7,7 +7,7 @@ interface StatCardProps {
 
 export function StatCard({ label, value, subtitle, accentColor = "hsl(var(--primary))" }: StatCardProps) {
   return (
-    <div className="rounded-lg border border-border/40 bg-card p-4 flex flex-col justify-between min-h-[100px]">
+    <div className="rounded-lg bg-card p-4 flex flex-col justify-between min-h-[100px]">
       <p className="text-[10px] font-body uppercase tracking-widest text-muted-foreground/70 mb-1">{label}</p>
       <p className="font-nums text-xl font-semibold tracking-tight text-foreground leading-none">{value}</p>
       <div className="flex items-center gap-1.5 mt-2">
