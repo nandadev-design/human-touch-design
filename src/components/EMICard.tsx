@@ -69,13 +69,13 @@ export function EMICard({ entry, onEdit, onRemove }: EMICardProps) {
           {/* Completion progress bar */}
           {entry.totalAmount > 0 && (
             <div className="mb-4">
-              <div className="w-full h-2.5 rounded-full bg-muted overflow-hidden flex gap-[2px]">
-                {Array.from({ length: 10 }).map((_, i) => (
+              <div className="w-full flex gap-[3px]">
+                {Array.from({ length: 40 }).map((_, i) => (
                   <div
                     key={i}
                     className={cn(
-                      "flex-1 rounded-sm",
-                      i < Math.round(paidPercentage / 10) ? "bg-primary" : "bg-muted"
+                      "flex-1 h-6 rounded-[3px]",
+                      i < Math.round((paidPercentage / 100) * 40) ? "bg-primary" : "bg-progress-track"
                     )}
                   />
                 ))}
