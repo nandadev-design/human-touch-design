@@ -14,7 +14,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 220 16% 12%;
 
-    --primary: 24 80% 55%;
+    --primary: 214 80% 60%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 220 4% 74%;
@@ -26,10 +26,10 @@
     --accent: 220 4% 94%;
     --accent-foreground: 220 16% 12%;
 
-    --destructive: 0 100% 50%;
+    --destructive: 5 100% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --success: 145 58% 37%;
+    --success: 142 100% 39%;
     --success-foreground: 0 0% 100%;
 
     --warning: 24 80% 55%;
@@ -37,8 +37,9 @@
 
     --border: 220 4% 74%;
     --input: 220 4% 74%;
-    --ring: 24 80% 55%;
+    --ring: 214 80% 60%;
 
+    --status-box: 220 4% 94%;
     --radius: 0.625rem;
 
     --sidebar-background: 0 0% 98%;
