@@ -117,7 +117,7 @@ export function EMICard({ entry, onEdit, onRemove }: EMICardProps) {
           {/* Pay button + undo in separate box */}
           <div className="bg-button-box rounded-b-xl px-5 py-[25px] -mx-5 sm:-mx-6 -mb-5 sm:-mb-6 mt-5">
             <div className="flex items-center gap-2">
-              <button className="flex-1 py-3 rounded-lg bg-primary text-primary-foreground text-sm font-body font-semibold hover:bg-primary/90 transition-colors">
+              <button className="flex-1 py-3 rounded-xl bg-primary text-primary-foreground text-sm font-body font-semibold hover:bg-primary/90 transition-colors">
                 Pay ₹{entry.monthlyPayment.toLocaleString("en-IN")}
               </button>
               <button className="w-11 h-11 rounded-lg bg-muted dark:bg-status-box flex items-center justify-center hover:bg-muted/80 dark:hover:bg-status-box/80 transition-colors flex-shrink-0">
