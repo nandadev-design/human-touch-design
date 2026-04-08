@@ -63,6 +63,7 @@ export default {
         },
         "button-box": "hsl(var(--button-box))",
         "status-box": "hsl(var(--status-box))",
+        "progress-track": "hsl(var(--progress-track))",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",

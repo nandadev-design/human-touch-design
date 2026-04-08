@@ -21,7 +21,7 @@ export function EMICard({ entry, onEdit, onRemove }: EMICardProps) {
       {/* Header */}
       <div className="flex items-center justify-between mb-5">
         <div className="flex items-center gap-3">
-          <div className="w-11 h-11 rounded-full bg-muted flex items-center justify-center">
+          <div className="w-11 h-11 rounded-full bg-muted dark:bg-status-box flex items-center justify-center">
             <span className="text-xs font-body font-semibold text-muted-foreground">{entry.initials}</span>
           </div>
           <div>
@@ -69,13 +69,13 @@ export function EMICard({ entry, onEdit, onRemove }: EMICardProps) {
           {/* Completion progress bar */}
           {entry.totalAmount > 0 && (
             <div className="mb-4">
-              <div className="w-full h-2.5 rounded-full bg-muted overflow-hidden flex gap-[2px]">
-                {Array.from({ length: 10 }).map((_, i) => (
+              <div className="w-full flex gap-[3px]">
+                {Array.from({ length: 40 }).map((_, i) => (
                   <div
                     key={i}
                     className={cn(
-                      "flex-1 rounded-sm",
-                      i < Math.round(paidPercentage / 10) ? "bg-primary" : "bg-muted"
+                      "flex-1 h-6 rounded-[3px]",
+                      i < Math.round((paidPercentage / 100) * 40) ? "bg-primary" : "bg-progress-track"
                     )}
                   />
                 ))}
@@ -120,7 +120,7 @@ export function EMICard({ entry, onEdit, onRemove }: EMICardProps) {
               <button className="flex-1 py-3 rounded-lg bg-primary text-primary-foreground text-sm font-body font-semibold hover:bg-primary/90 transition-colors">
                 Pay ₹{entry.monthlyPayment.toLocaleString("en-IN")}
               </button>
-              <button className="w-11 h-11 rounded-lg bg-muted flex items-center justify-center hover:bg-muted/80 transition-colors flex-shrink-0">
+              <button className="w-11 h-11 rounded-lg bg-muted dark:bg-status-box flex items-center justify-center hover:bg-muted/80 dark:hover:bg-status-box/80 transition-colors flex-shrink-0">
                 <img src={iconUndo} alt="Undo" className="w-4 h-4 opacity-40 dark:invert" />
               </button>
             </div>
