@@ -40,7 +40,7 @@ export function EMICard({ entry, onEdit, onRemove }: EMICardProps) {
           </button>
           <button
             onClick={() => onRemove(entry.id)}
-            className="w-9 h-9 rounded-lg border border-destructive/30 flex items-center justify-center hover:bg-destructive/5 transition-colors"
+            className="w-9 h-9 rounded-xl border border-destructive/30 flex items-center justify-center hover:bg-destructive/5 transition-colors"
           >
             <img src={iconClose} alt="Remove" className="w-3.5 h-3.5 opacity-70" style={{ filter: "invert(19%) sepia(99%) saturate(7452%) hue-rotate(0deg) brightness(101%) contrast(110%)" }} />
           </button>
