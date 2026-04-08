@@ -21,7 +21,7 @@ export function EMICard({ entry, onEdit, onRemove }: EMICardProps) {
       {/* Header */}
       <div className="flex items-center justify-between mb-5">
         <div className="flex items-center gap-3">
-          <div className="w-11 h-11 rounded-full bg-muted flex items-center justify-center">
+          <div className="w-11 h-11 rounded-full bg-muted dark:bg-status-box flex items-center justify-center">
             <span className="text-xs font-body font-semibold text-muted-foreground">{entry.initials}</span>
           </div>
           <div>
