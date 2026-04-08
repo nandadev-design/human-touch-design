@@ -120,7 +120,7 @@ export function EMICard({ entry, onEdit, onRemove }: EMICardProps) {
               <button className="flex-1 py-3 rounded-xl bg-primary text-primary-foreground text-sm font-body font-semibold hover:bg-primary/90 transition-colors">
                 Pay ₹{entry.monthlyPayment.toLocaleString("en-IN")}
               </button>
-              <button className="w-11 h-11 rounded-lg bg-muted dark:bg-status-box flex items-center justify-center hover:bg-muted/80 dark:hover:bg-status-box/80 transition-colors flex-shrink-0">
+              <button className="w-11 h-11 rounded-xl bg-muted dark:bg-undo-button flex items-center justify-center hover:bg-muted/80 dark:hover:bg-undo-button/80 transition-colors flex-shrink-0">
                 <img src={iconUndo} alt="Undo" className="w-4 h-4 opacity-40 dark:invert" />
               </button>
             </div>
