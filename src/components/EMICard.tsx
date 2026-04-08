@@ -70,7 +70,7 @@ export function EMICard({ entry, onEdit, onRemove }: EMICardProps) {
           {entry.totalAmount > 0 && (
             <div className="mb-4">
               <div className="w-full flex gap-[3px]">
-                {Array.from({ length: 40 }).map((_, i) => (
+                {Array.from({ length: 25 }).map((_, i) => (
                   <div
                     key={i}
                     className={cn(
