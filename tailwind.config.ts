@@ -62,6 +62,7 @@ export default {
           foreground: "hsl(var(--card-foreground))",
         },
         "button-box": "hsl(var(--button-box))",
+        "status-box": "hsl(var(--status-box))",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",

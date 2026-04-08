@@ -12,6 +12,10 @@ interface EMICardProps {
 }
 
 export function EMICard({ entry, onEdit, onRemove }: EMICardProps) {
+  const paidPercentage = entry.totalAmount > 0
+    ? Math.round(((entry.totalAmount - entry.balanceRemaining) / entry.totalAmount) * 100)
+    : 0;
+
   return (
     <div className="rounded-xl bg-card p-5 sm:p-6 transition-all hover:shadow-lg hover:-translate-y-0.5 duration-200 flex flex-col">
       {/* Header */}
@@ -22,10 +26,7 @@ export function EMICard({ entry, onEdit, onRemove }: EMICardProps) {
           </div>
           <div>
             <h3 className="text-[15px] font-body font-semibold text-foreground leading-tight">{entry.name}</h3>
-            <span className={cn(
-              "text-[11px] font-body font-semibold uppercase tracking-wide",
-              entry.type === "emi" ? "text-primary" : "text-primary"
-            )}>
+            <span className="text-[11px] font-body font-semibold uppercase tracking-wide text-primary">
               {entry.type === "emi" ? "EMI" : "Subscription"}
             </span>
           </div>
@@ -52,7 +53,7 @@ export function EMICard({ entry, onEdit, onRemove }: EMICardProps) {
           <div className="mb-4">
             <p className="text-xs font-body text-muted-foreground mb-1">Balance Remaining</p>
             <div className="flex items-baseline justify-between">
-              <p className="font-nums text-3xl font-semibold text-foreground leading-none tracking-tight">
+              <p className="font-nums text-[32px] font-semibold text-foreground leading-none tracking-tight">
                 ₹{entry.balanceRemaining.toLocaleString("en-IN")}
               </p>
               {entry.monthsRemaining > 0 && (
@@ -65,6 +66,26 @@ export function EMICard({ entry, onEdit, onRemove }: EMICardProps) {
             Monthly <span className="font-nums font-semibold text-foreground">₹{entry.monthlyPayment.toLocaleString("en-IN")}</span>
           </p>
 
+          {/* Completion progress bar */}
+          {entry.totalAmount > 0 && (
+            <div className="mb-4">
+              <div className="w-full h-2.5 rounded-full bg-muted overflow-hidden flex gap-[2px]">
+                {Array.from({ length: 10 }).map((_, i) => (
+                  <div
+                    key={i}
+                    className={cn(
+                      "flex-1 rounded-sm",
+                      i < Math.round(paidPercentage / 10) ? "bg-primary" : "bg-muted"
+                    )}
+                  />
+                ))}
+              </div>
+              <p className="text-[11px] text-muted-foreground font-body mt-1.5">
+                {paidPercentage}% of ₹{entry.totalAmount.toLocaleString("en-IN")}
+              </p>
+            </div>
+          )}
+
           <div className="flex items-center gap-2 text-sm text-muted-foreground font-body mb-5">
             <img src={iconCalendar} alt="" className="w-4 h-4 opacity-40 dark:invert" />
             <span>Due {entry.dueDate}st of every month</span>
@@ -72,14 +93,14 @@ export function EMICard({ entry, onEdit, onRemove }: EMICardProps) {
 
           {/* Payment status */}
           {entry.isOverdue ? (
-            <div className="flex items-center gap-3 px-4 py-3 rounded-lg bg-destructive/5">
+            <div className="flex items-center gap-3 px-4 py-3 rounded-lg bg-status-box">
               <span className="w-2 h-2 rounded-full bg-destructive flex-shrink-0" />
               <div>
                 <p className="text-sm font-body text-destructive font-medium">Overdue by {entry.overdueDays}d</p>
               </div>
             </div>
           ) : entry.lastPaidDate ? (
-            <div className="flex items-start gap-3 px-4 py-3 rounded-lg bg-muted/50">
+            <div className="flex items-start gap-3 px-4 py-3 rounded-lg bg-status-box">
               <span className="w-2 h-2 rounded-full bg-success flex-shrink-0 mt-1.5" />
               <div>
                 <p className="text-sm font-body text-success font-medium">Paid on {entry.lastPaidDate}</p>
@@ -111,7 +132,7 @@ export function EMICard({ entry, onEdit, onRemove }: EMICardProps) {
       {entry.type === "subscription" && (
         <>
           <div className="flex items-baseline justify-between mb-4">
-            <p className="font-nums text-3xl font-semibold text-foreground leading-none tracking-tight">
+            <p className="font-nums text-[32px] font-semibold text-foreground leading-none tracking-tight">
               ₹{entry.monthlyPayment.toLocaleString("en-IN")}
             </p>
             <span className="text-sm text-muted-foreground font-body">/month</span>
