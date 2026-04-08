@@ -75,7 +75,7 @@ export function EMICard({ entry, onEdit, onRemove }: EMICardProps) {
                     key={i}
                     className={cn(
                       "flex-1 h-6 rounded-[3px]",
-                      i < Math.round((paidPercentage / 100) * 40) ? "bg-primary" : "bg-progress-track"
+                      i < Math.round((paidPercentage / 100) * 25) ? "bg-primary" : "bg-progress-track"
                     )}
                   />
                 ))}
