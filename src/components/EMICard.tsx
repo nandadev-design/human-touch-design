@@ -34,7 +34,7 @@ export function EMICard({ entry, onEdit, onRemove }: EMICardProps) {
         <div className="flex gap-2">
           <button
             onClick={() => onEdit(entry)}
-            className="w-9 h-9 rounded-lg border border-border/50 flex items-center justify-center hover:bg-muted transition-colors"
+            className="w-9 h-9 rounded-xl border border-border/50 flex items-center justify-center hover:bg-muted transition-colors"
           >
             <img src={iconEdit} alt="Edit" className="w-4 h-4 opacity-50 dark:invert" />
           </button>
