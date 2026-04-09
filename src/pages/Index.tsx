@@ -80,14 +80,14 @@ const Index = () => {
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setTheme(isDark ? "light" : "dark")}
-                className="p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
+                className="p-2 rounded-[5px] text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
                 aria-label="Toggle theme"
               >
                 {isDark ? <Sun size={18} /> : <Moon size={18} />}
               </button>
               <button
                 onClick={handleAdd}
-                className="px-4 py-2 rounded-md bg-primary text-primary-foreground text-sm font-body font-medium hover:bg-primary/90 transition-colors"
+                className="px-4 py-2 rounded-[5px] bg-primary text-primary-foreground text-sm font-body font-medium hover:bg-primary/90 transition-colors"
               >
                 + Add
               </button>

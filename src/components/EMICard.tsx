@@ -112,7 +112,7 @@ export function EMICard({ entry, onEdit, onRemove }: EMICardProps) {
                   <div
                     key={i}
                     className={cn(
-                      "flex-1 h-[14px] rounded-[3px]",
+                      "flex-1 h-[20px] rounded-[3px]",
                       i < Math.round((paidPercentage / 100) * totalBars) ? "bg-primary" : "bg-progress-track"
                     )}
                   />
