@@ -67,7 +67,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-10">
         {/* Header */}
         <div className="mb-6">
           <p className="text-[11px] font-body uppercase tracking-[0.2em] text-muted-foreground/70 mb-1">
