@@ -98,7 +98,7 @@ const Index = () => {
         {/* Stats Grid */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-0">
           <StatCard label="Total outstanding" value={`₹${stats.totalOutstanding.toLocaleString("en-IN")}`} subtitle={`${stats.activeEMIs} active EMIs`} accentColor="hsl(0, 70%, 55%)" />
-          <StatCard label="Monthly EMI" value={`₹${stats.monthlyEMI.toLocaleString("en-IN")}`} subtitle={`across ${stats.totalLoans} loans`} accentColor="hsl(24, 80%, 50%)" />
+          <StatCard label="Monthly EMI" value={`₹${stats.monthlyEMI.toLocaleString("en-IN")}`} subtitle={`across ${stats.totalLoans} loans`} accentColor="hsl(24, 81%, 55%)" />
           <StatCard label="Monthly subs" value={`₹${stats.monthlySubs.toLocaleString("en-IN")}`} subtitle={`${stats.activeSubs} subscriptions`} accentColor="hsl(270, 60%, 55%)" />
           <StatCard label="Total monthly out" value={`₹${stats.totalMonthlyOut.toLocaleString("en-IN")}`} subtitle="EMIs + subscriptions" accentColor="hsl(190, 70%, 45%)" />
         </div>

@@ -65,6 +65,8 @@ export default {
         "status-box": "hsl(var(--status-box))",
         "progress-track": "hsl(var(--progress-track))",
         "undo-button": "hsl(var(--undo-button))",
+        "overdue-box": "hsl(var(--overdue-box))",
+        "paid-box": "hsl(var(--paid-box))",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",

@@ -14,7 +14,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 220 16% 12%;
 
-    --primary: 214 80% 60%;
+    --primary: 24 81% 55%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 220 4% 74%;
@@ -37,10 +37,13 @@
 
     --border: 220 4% 74%;
     --input: 220 4% 74%;
-    --ring: 214 80% 60%;
+    --ring: 24 81% 55%;
 
     --status-box: 220 4% 94%;
     --progress-track: 220 4% 85%;
+
+    --overdue-box: 249 31% 15%;
+    --paid-box: 193 96% 10%;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -59,15 +62,15 @@
   .dark {
     --background: 220 100% 2%;
     --foreground: 0 0% 100%;
-    --button-box: 216 62% 15%;
+    --button-box: 217 52% 11%;
 
-    --card: 216 96% 10%;
+    --card: 214 94% 7%;
     --card-foreground: 0 0% 100%;
 
     --popover: 216 62% 15%;
     --popover-foreground: 0 0% 100%;
 
-    --primary: 214 80% 60%;
+    --primary: 24 81% 55%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 216 6% 25%;
@@ -90,20 +93,23 @@
 
     --border: 220 4% 38%;
     --input: 220 4% 38%;
-    --ring: 214 80% 60%;
+    --ring: 24 81% 55%;
 
     --status-box: 219 55% 16%;
     --progress-track: 216 46% 19%;
     --undo-button: 216 43% 21%;
 
+    --overdue-box: 249 31% 15%;
+    --paid-box: 193 96% 10%;
+
     --sidebar-background: 216 96% 10%;
     --sidebar-foreground: 0 0% 100%;
-    --sidebar-primary: 214 80% 60%;
+    --sidebar-primary: 24 81% 55%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 216 6% 25%;
     --sidebar-accent-foreground: 0 0% 100%;
     --sidebar-border: 220 4% 38%;
-    --sidebar-ring: 214 80% 60%;
+    --sidebar-ring: 24 81% 55%;
   }
 }
 

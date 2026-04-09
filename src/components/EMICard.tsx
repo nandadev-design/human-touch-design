@@ -11,10 +11,48 @@ interface EMICardProps {
   onRemove: (id: string) => void;
 }
 
+function formatDateDDMMYYYY(dateStr: string): string {
+  // Handle ISO dates like "2026-04-01"
+  const d = new Date(dateStr);
+  if (!isNaN(d.getTime())) {
+    const dd = String(d.getDate()).padStart(2, "0");
+    const mm = String(d.getMonth() + 1).padStart(2, "0");
+    const yyyy = d.getFullYear();
+    return `${dd}-${mm}-${yyyy}`;
+  }
+  return dateStr;
+}
+
+function formatNextDueDDMMYYYY(dayOfMonth: number): string {
+  const now = new Date();
+  let dueDate = new Date(now.getFullYear(), now.getMonth(), dayOfMonth);
+  if (dueDate <= now) {
+    dueDate = new Date(now.getFullYear(), now.getMonth() + 1, dayOfMonth);
+  }
+  const dd = String(dueDate.getDate()).padStart(2, "0");
+  const mm = String(dueDate.getMonth() + 1).padStart(2, "0");
+  const yyyy = dueDate.getFullYear();
+  return `${dd}-${mm}-${yyyy}`;
+}
+
+function getLastDueDateDDMMYYYY(dayOfMonth: number): string {
+  const now = new Date();
+  let dueDate = new Date(now.getFullYear(), now.getMonth(), dayOfMonth);
+  if (dueDate > now) {
+    dueDate = new Date(now.getFullYear(), now.getMonth() - 1, dayOfMonth);
+  }
+  const dd = String(dueDate.getDate()).padStart(2, "0");
+  const mm = String(dueDate.getMonth() + 1).padStart(2, "0");
+  const yyyy = dueDate.getFullYear();
+  return `${dd}-${mm}-${yyyy}`;
+}
+
 export function EMICard({ entry, onEdit, onRemove }: EMICardProps) {
   const paidPercentage = entry.totalAmount > 0
     ? Math.round(((entry.totalAmount - entry.balanceRemaining) / entry.totalAmount) * 100)
     : 0;
+
+  const totalBars = 35;
 
   return (
     <div className="rounded-xl bg-card p-5 sm:p-6 transition-all hover:shadow-lg hover:-translate-y-0.5 duration-200 flex flex-col">
@@ -70,12 +108,12 @@ export function EMICard({ entry, onEdit, onRemove }: EMICardProps) {
           {entry.totalAmount > 0 && (
             <div className="mb-4">
               <div className="w-full flex gap-[3px]">
-                {Array.from({ length: 25 }).map((_, i) => (
+                {Array.from({ length: totalBars }).map((_, i) => (
                   <div
                     key={i}
                     className={cn(
-                      "flex-1 h-6 rounded-[3px]",
-                      i < Math.round((paidPercentage / 100) * 25) ? "bg-primary" : "bg-progress-track"
+                      "flex-1 h-[14px] rounded-[3px]",
+                      i < Math.round((paidPercentage / 100) * totalBars) ? "bg-primary" : "bg-progress-track"
                     )}
                   />
                 ))}
@@ -93,19 +131,20 @@ export function EMICard({ entry, onEdit, onRemove }: EMICardProps) {
 
           {/* Payment status */}
           {entry.isOverdue ? (
-            <div className="flex items-center gap-3 px-4 py-3 rounded-[5px] bg-status-box">
-              <span className="w-2 h-2 rounded-full bg-destructive flex-shrink-0" />
+            <div className="flex items-start gap-3 px-4 py-3 rounded-[5px] bg-overdue-box">
+              <span className="w-2 h-2 rounded-full bg-destructive flex-shrink-0 mt-1.5" />
               <div>
                 <p className="text-sm font-body text-destructive font-medium">Overdue by {entry.overdueDays}d</p>
+                <p className="text-xs text-muted-foreground font-body mt-0.5">Was due on {getLastDueDateDDMMYYYY(entry.dueDate)}</p>
               </div>
             </div>
           ) : entry.lastPaidDate ? (
-            <div className="flex items-start gap-3 px-4 py-3 rounded-[5px] bg-status-box">
+            <div className="flex items-start gap-3 px-4 py-3 rounded-[5px] bg-paid-box">
               <span className="w-2 h-2 rounded-full bg-success flex-shrink-0 mt-1.5" />
               <div>
-                <p className="text-sm font-body text-success font-medium">Paid on {entry.lastPaidDate}</p>
+                <p className="text-sm font-body text-success font-medium">Paid on {formatDateDDMMYYYY(entry.lastPaidDate)}</p>
                 {entry.nextDueDate && (
-                  <p className="text-xs text-muted-foreground font-body mt-0.5">Next Due on {entry.nextDueDate}</p>
+                  <p className="text-xs text-muted-foreground font-body mt-0.5">Next Due on {formatNextDueDDMMYYYY(entry.dueDate)}</p>
                 )}
               </div>
             </div>
