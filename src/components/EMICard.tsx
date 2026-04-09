@@ -40,7 +40,7 @@ export function EMICard({ entry, onEdit, onRemove }: EMICardProps) {
           </button>
           <button
             onClick={() => onRemove(entry.id)}
-            className="w-9 h-9 rounded-xl border border-destructive/30 flex items-center justify-center hover:bg-destructive/5 transition-colors"
+            className="w-9 h-9 rounded-[5px] border border-destructive/30 flex items-center justify-center hover:bg-destructive/5 transition-colors"
           >
             <img src={iconClose} alt="Remove" className="w-3.5 h-3.5 opacity-70" style={{ filter: "invert(19%) sepia(99%) saturate(7452%) hue-rotate(0deg) brightness(101%) contrast(110%)" }} />
           </button>
@@ -93,14 +93,14 @@ export function EMICard({ entry, onEdit, onRemove }: EMICardProps) {
 
           {/* Payment status */}
           {entry.isOverdue ? (
-            <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-status-box">
+            <div className="flex items-center gap-3 px-4 py-3 rounded-[5px] bg-status-box">
               <span className="w-2 h-2 rounded-full bg-destructive flex-shrink-0" />
               <div>
                 <p className="text-sm font-body text-destructive font-medium">Overdue by {entry.overdueDays}d</p>
               </div>
             </div>
           ) : entry.lastPaidDate ? (
-            <div className="flex items-start gap-3 px-4 py-3 rounded-xl bg-status-box">
+            <div className="flex items-start gap-3 px-4 py-3 rounded-[5px] bg-status-box">
               <span className="w-2 h-2 rounded-full bg-success flex-shrink-0 mt-1.5" />
               <div>
                 <p className="text-sm font-body text-success font-medium">Paid on {entry.lastPaidDate}</p>
@@ -117,10 +117,10 @@ export function EMICard({ entry, onEdit, onRemove }: EMICardProps) {
           {/* Pay button + undo in separate box */}
           <div className="bg-button-box rounded-b-xl px-5 py-[25px] -mx-5 sm:-mx-6 -mb-5 sm:-mb-6 mt-5">
             <div className="flex items-center gap-2">
-              <button className="flex-1 py-3 rounded-xl bg-primary text-primary-foreground text-sm font-body font-semibold hover:bg-primary/90 transition-colors">
+              <button className="flex-1 py-3 rounded-[5px] bg-primary text-primary-foreground text-sm font-body font-semibold hover:bg-primary/90 transition-colors">
                 Pay ₹{entry.monthlyPayment.toLocaleString("en-IN")}
               </button>
-              <button className="w-11 h-11 rounded-xl bg-muted dark:bg-undo-button flex items-center justify-center hover:bg-muted/80 dark:hover:bg-undo-button/80 transition-colors flex-shrink-0">
+              <button className="w-11 h-11 rounded-[5px] bg-muted dark:bg-undo-button flex items-center justify-center hover:bg-muted/80 dark:hover:bg-undo-button/80 transition-colors flex-shrink-0">
                 <img src={iconUndo} alt="Undo" className="w-4 h-4 opacity-40 dark:invert" />
               </button>
             </div>
